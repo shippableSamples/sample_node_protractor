@@ -1,0 +1,34 @@
+language: node_js
+
+node_js:
+  - "0.10"
+
+addons:
+  firefox: "19.0"
+
+services:
+  - selenium
+
+install:
+  - npm install -g istanbul
+  - npm install -g protractor
+  - npm install jasmine-reporters@1.0.0
+
+before_script:
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
+  - "export DISPLAY=:99.0"
+  - "/etc/init.d/xvfb start"
+
+script:
+  - protractor --version
+  - protractor conf.js
+
+after_script:
+  - "/etc/init.d/xvfb stop"
+  - istanbul cover conf.js -- -u tdd
+  - istanbul report cobertura --dir  shippable/codecoverage/
+
+notifications:
+  email:
+    - exampleone@org.com
