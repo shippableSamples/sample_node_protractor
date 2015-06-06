@@ -29,6 +29,3 @@ after_script:
   - istanbul cover conf.js -- -u tdd
   - istanbul report cobertura --dir  shippable/codecoverage/
 
-notifications:
-  email:
-    - exampleone@org.com
