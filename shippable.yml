@@ -15,6 +15,6 @@ build:
     - sudo npm install -g protractor
     - sudo npm install jasmine-reporters@1.0.0
     - protractor --version
-    - protractor conf.js
+    - xvfb-run --server-args="-ac" protractor conf.js
     - istanbul cover conf.js -- -u tdd
     - istanbul report cobertura --dir  shippable/codecoverage/
